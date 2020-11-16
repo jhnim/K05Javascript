@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpDownGame.html</title>
+
+    <script>
+
+            
+
+            var count = document.getElementById("countNumber");
+            var gImg = document.getElementsByTagName("img");
+            
+            var randomNum = parseInt(Math.random()*100)+1;
+            alert(randomNum);
+
+        function getNumber(){
+
+            var inputNumber = document.getElementById("inputNum").value;
+
+            if(!inputNumber){
+                alert("정수를 입력하세요.");
+                document.getElementById("inputNum").focus();
+                document.getElementById("inputNum").value=0;
+            }
+            else if(inputNumber<=0 || inputNumber>100){
+
+                alert("1~100 사이의 정수를 입력해주세요.");
+                document.getElementById("inputNum").value=1;
+                changeImg(3).focus();
+            }
+
+
+            while(inputNumber!=null){
+                
+                if(count++){
+                document.getElementById("countNumber").value=1;
+                    document.getElementById("countNumber"+1).focus();
+                }
+
+                if(inputNumber>randomNum){
+
+                    changeImg(1).focus();
+                    document.getElementById("inputNum").value=1;
+                    count++;
+                    continue;
+                    
+
+                }
+                else if(inputNumber<randomNum){
+
+                    
+                    changeImg(2).focus();
+                    document.getElementById("inputNum").value=1;
+                    count++;
+                    continue;
+                }
+           
+                if(count>=7){
+
+                    var answer = window.confirm("시도횟수가 초과하였습니다. 게임을 재시작 합니다.");
+
+                    if(answer==true){
+                        location.reload();
+                    }
+                    else if(answer==false){
+                        alert("게임을 종료합니다.");
+                        break;
+                    }
+                
+                }
+                else if(count<=7 && inputNumber==randomNum){
+                    alert("정답입니다.");
+                    changeImg(4).focus();
+                    break;
+                }
+            }
+
+            
+
+
+        }
+
+        function changeImg(gImg){
+
+            if(gImg==1){
+                document.getElementById(updownImg).src = "../images/down.jpg";
+            }
+            else if(gImg==2){
+                document.getElementById(updownImg).src = "../images/up.jpg";
+            }
+            else if(gImg==3){
+                document.getElementById(updownImg).src = "../images/error.jpg";
+            }
+            else if(gImg==4){
+                document.getElementById(updownImg).src = "../images/answer.jpg";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1><strong>업다운게임</strong></h1>
+
+    <h2><strong>1~100사이의 숫자를 입력하세요.</strong></h2>
+    <br>
+
+    <h2><strong>시도횟수 : <span id="countNumber">0</span>회</strong></h2>
+
+    <h2>숫자입력 : <input type="number" id="inputNum"> 
+        <button type="button" onclick="getNumber();">확인</button></h2>
+
+    <table>
+        <tr>
+            <img src="../images/updowngame.jpg" id="upDownImg">
+        </tr>
+    </table>
+</body>
+</html>

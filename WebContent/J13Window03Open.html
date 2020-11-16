@@ -11,7 +11,8 @@
             - 창의 이름을 지정하지 않으면 동일한 창이 여러개 띄워질 수도 있다.
             - 창의 이름이 동일하면 여러개의 창이 하나의 창에 띄워질 수도 있다.
         -->
-    <script>
+    <script type="text/javascript">
+
         function findZipcode(){
             window.open("./pages/zipcode.html",
             "Zip",
@@ -19,6 +20,18 @@
         /*
         대부분의 속성은 익스플로러에서만 적용된다. 크롬, 파이어폭스에서는 적용되지 않는다.
         */
+        }
+
+        function setZipcode(zip, addr){
+            opener.document.getElementId("zipcode").value = zip;
+            opener.document.getElementId("addr1").value = addr;
+            opener.document.getElementId("addr2").value = addr;
+            self.close();
+        }
+
+        function zipClose(){
+            alert("창을 닫습니다.");
+            self.close();
         }
 
         //open()함수가 반환하는 윈도우객체를 저장하기 위한 전역변수
@@ -34,7 +47,7 @@
                             "pop1", "width=300, height=300, left=0, top=0");
         }
         function popClose(){
-            alert("팝업창을 닫습니다.");
+            alert("팝업창1을 닫습니다.");
             winObj1.close();
         }
 
@@ -53,6 +66,10 @@
             var topVar = s_height/2 - 300/2; 
             window.open("./pages/popup01.html", "popup", "width=300, height=300, left="
                 +leftVar+" ,top="+topVar);
+        }
+
+        function openChild1(){
+            window.open("./pages/openChild1st.html", "child1", "width=300, height=300, left=0, top=0");
         }
     </script>
 </head>
