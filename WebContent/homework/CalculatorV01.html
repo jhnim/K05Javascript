@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalculatorV01.html</title>
+
+    <style>
+
+        table{
+            background-color: #DDDDDD; border-radius: 20px 20px 20px 20px; width: 400px; height: 400px;
+            padding-top: 2pt; padding-left: 2pt; padding-right: 2pt;
+        }
+
+        .bt > button{
+            background-color: #7B7B7B; border-radius: 20px 20px 20px 20px;
+                width: 200px; height: 55px; font-size: 20px;
+        }
+
+        .or > button{
+            background-color: #FA960A; color: white; border-radius: 20px 20px 20px 20px;
+                width: 100px; height: 55px; font-size: 20px;
+        }
+
+       th > button{
+            background-color: #373737; color: white; border-radius: 20px 20px 20px 20px;
+                width: 100px; height: 55px; font-size: 20px;
+       }
+
+       #display{
+            background-color: #70C738; border-radius: 20px 20px 20px 20px; 
+                width:98%; height: 20%; text-align: right; font-size: 30pt; font-weight: bold;
+       }
+    </style>
+
+    <script>
+        
+        var str = "";
+        function num(obj){
+            
+            var dp = document.getElementById("display");
+            
+           if(dp.innerText=='0'){
+               dp.innerHTML=obj;
+            //dp.innerHTML = dp.innerHTML+obj;
+            //str+=obj
+            }
+            else{
+                if(obj=="="){
+
+                    dp.innerHTML = eval(dp.innerText);
+                }
+                else{
+                    dp.innerHTML += obj;
+                }
+
+            }
+        }
+
+        function BackSpace(){
+            var cn = document.getElementById("display");
+            cn.innerHTML = cn.innerText.substr(0, cn.innerText.length-1);
+        }
+
+    </script>
+</head>
+<body>
+    <table>
+        <tr >
+        <td colspan="4" id="display">0</td>
+        </tr>
+
+        <tr>
+            <th colspan="2" class="bt"><button type="button" onclick="BackSpace();">BackSpace</button></th>
+            <th colspan="2" class="bt"><button type="reset" onclick="location.reload();">C</button></th>
+        </tr>
+        <tr>    
+            <th><button type="button" onclick="num('1');">1</button></th>
+            <th><button type="button" onclick="num('2');">2</button></th>
+            <th><button type="button" onclick="num('3');">3</button></th>
+            <th class="or"><button type="button" onclick="num('/');">/</button></th>
+        </tr>
+        <tr>
+            <th><button type="button" onclick="num('4');">4</button></th>
+            <th><button type="button" onclick="num('5');">5</button></th>
+            <th><button type="button" onclick="num('6');">6</button></th>
+            <th class="or"><button type="button" onclick="num('*');">X</button></th>
+        </tr>
+        <tr>
+            <th><button type="button" onclick="num('7');">7</button></th>
+            <th><button type="button" onclick="num('8');">8</button></th>
+            <th><button type="button" onclick="num('9');">9</button></th>
+            <th class="or"><button type="button" onclick="num('+');">+</button></th>
+        </tr>        
+        <tr>
+            <th><button type="button" onclick="num('=')">=</button></th>
+            <th><button type="button" onclick="num('0');">0</button></th>
+            <th><button type="button" onclick="num('.');">.</button></th>
+            <th class="or"><button type="button" onclick="num('-');">-</button></th>
+        </tr>
+    </table>
+
+</body>
+</html>

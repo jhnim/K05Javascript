@@ -85,16 +85,21 @@
         function changeImg(gImg){
 
             if(gImg==1){
-                document.getElementById(updownImg).src = "../images/down.jpg";
+                document.getElementById(updownImg)[0].src = "../images/down.jpg";
             }
             else if(gImg==2){
-                document.getElementById(updownImg).src = "../images/up.jpg";
+                document.write("up");
+                gImg[0].src = "../images/up.jpg";
             }
             else if(gImg==3){
-                document.getElementById(updownImg).src = "../images/error.jpg";
+                document.write("up");
+
+                document.getElementById(updownImg).src[0] = "../images/error.jpg";
             }
             else if(gImg==4){
-                document.getElementById(updownImg).src = "../images/answer.jpg";
+                document.write("up");
+
+                document.getElementById(updownImg).src[0] = "../images/answer.jpg";
             }
         }
     </script>
