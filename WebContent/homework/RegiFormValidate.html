@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegiFormReview.html</title>
+    <!-- 
+        구글웹폰트 : https://fonts.google.com/
+        jQuery UI : http://jquery.com/
+                    http://jqueryui.com/
+     -->
+     <!--  
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gamja+Flower&display=swap" rel="stylesheet">
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gamja+Flower&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+        *{
+            /* font-family:'Gamja Flower', cursive; */
+            /* font-family: 'Do Hyeon', sans-serif; 문서의 기본폰트 설정 */
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0 auto;/* 문서 전체의 가운데 정렬 */
+        }
+        .AllWrap{padding: 50px;}
+        .Wrap_regiform{border: 1px solid red; width: 720px; padding: 5px 10px;}
+        .Wrap_regiform table{
+            border-top: 3px solid black;
+            border-left: 1px solid silver;
+            border-right: 1px solid silver;
+            border-bottom: 1px solid silver;
+            width: 100%;
+        }
+        /* 버튼의 기본색깔과 오버시 효과*/
+        .Wrap_regiform table tr td:nth-child(2) button{
+            background-color: #333333; font-size: 1em; width: 100px;
+            padding: 5px; color: #ffffff; border: 2px solid #333333;
+        }
+        
+        .Wrap_regiform table tr td:nth-child(2) button:hover{
+            cursor: pointer; background-color: #727272;
+        }
+
+        #join{
+            background-color: #333333; font-size: 1em; width: 110px;
+            padding: 5px; color: #ffffff; border: 2px solid #333333;        
+        }
+
+        #join:hover{
+            cursor: pointer; background-color: #727272;
+        }
+
+        .Wrap_regiform table tr td input{padding: 8px; border: 1px solid #cccccc;}
+        .w01{width: 320px;}
+        .w02{width: 200px;}
+        .w03{width: 100px;}
+        .w04{width: 230px;}
+        .w05{width: 180px;}
+        .w06{width: 320px;}
+
+
+        .Wrap_regiform table tr td:nth-child(2) img.pick{
+            position: relative; top: 14px; left: -6px; height: 35px;
+        }
+        
+        .red{color: red;}
+
+        #ip{padding: 5pt;}
+        
+
+    </style>
+
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+    function zipcodeFind(){
+
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                // Daum 우편번호 API가 전달해주는 값을 콘솔에 출력
+                console.log(data.zonecode);
+                console.log(data.address);
+                console.log(data.sido);
+                console.log(data.sigungu);
+                //가입폼에 적용하기
+                var f = document.regiform;
+                f.zipcode.value = data.zonecode;
+                f.address1.value = data.address;
+                f.address2.focus();
+            }
+        }).open();
+    }   
+    </script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        //라디오를 버튼모양으로 바꿔주는 jQuery UI
+        $( "input[type=radio]" ).checkboxradio({
+            icon:false
+        });
+
+        //날짜선택을 편리하게 - Data Picker
+        $( "#birthday" ).datepicker({
+            dateFormat : "yy-mm-dd"
+        });
+
+    } );
+    </script>
+
+    <script>
+        var isValidate = function(frm){
+            //아이디가 공백일때 경고
+            if(frm.userid.value==''){
+                alert('아이디를 입력하세요.');
+                frm.userid.focus();
+                return false;
+            }
+            if(!frm.userpw.value || !frm.userpw1.value){
+                alert('패스워드를 입력하세요');
+                return false;
+            }
+            if(frm.userpw.value != frm.userpw1.value){
+                alert("입력한 패스원드가 일치하지 않습니다.");
+                frm.userpw.value="";
+                frm.userpw1.value="";
+                frm.userpw.focus();
+                return false;
+            }
+        }
+
+        function idCheck(fn){
+
+
+           if(fn.userid.value == ""){
+               alert("아이디를 입력하세요.");
+               fn.userid.focus();
+           }
+           else{
+               fn.id.readOnly = true;
+               window.open("./pages/id_overapping.jsp?id="+fn.id.value, "idover", "width=300, height=200");
+           }
+        }
+
+        function checkUserId(id){
+            //id입력됐는지 확인
+            if(!checkExistData(id, "아이디를"))
+                return false;
+
+                var idRegExp = /^[a-zA-z0-9]{8,12}$/;//아이디 유효성검사
+
+                if(idRegExp == /^[0-9]/){
+                    alert("아이디의 첫문자는 숫자로 시작할 수 없습니다.");
+                    form.userid.value = "";
+                    form.userid.focus();
+                    return false;
+                }
+
+                if(!idRegExp.test(id)){
+                    alert("아이디는 영문대소문자와 숫자만으로 8~12자리로 입력해야 합니다.");
+                    form.userid.value = "";
+                    form.userid.focus();
+                    return false;
+                }
+                return true; // 확인이 완료되었을 때
+        }
+
+        function checkPassword(id, pw1, pw2){
+            // 비밀번호가 입력되었는지 확인
+            if(checkExistData(pw1, "비밀번호를"))
+                return false;
+            //비밀번호 확인이 입력되었는지 확인하기
+            if(!checkExistData(pw2, "비밀번호 확인을"))
+                return false;
+
+            var pw1RedExp = /^[a-zA-Z1-8!-*]$/;//비밀번호 유효성검사
+            
+            if(!pw1RedExp.test(pw1)){
+                alert("비밀번호는 영문 대소문자와 숫자로만 입력해야 합니다.");
+                form.pw1.value = "";
+                form.pw1.focus();
+                return false;
+            }
+
+            if(pw1 != pw2){
+                alert("두 비밀번호가 맞지 않습니다.");
+                form.pw1.value = "";
+                form.pw2.value = "";
+                form.pw2.focus();
+                return false;
+            }
+            return true; // 확인이 완료되었을 때
+        }
+    </script>
+</head>
+<body>
+<div class="AllWrap">
+
+    <h2>회원가입폼</h2>
+
+    <div class="Wrap_regiform">
+
+    <form name="regiform" onsubmit="return isValidate();">
+    <table class="regi_table">
+        <colgroup>
+            <col width="180px">
+            <col width="*">
+        </colgroup>
+        <tr>
+            <td><span class="red">*</span> 아이디</td>
+            <td>
+                <input type="text" class="w01" name="userid" value="8~12자의 영문대소문자와 숫자로만 입력 " 
+                    minlength="8" maxlength="12"/>     
+                <button type="button" onclick="idCheck(this.Form);">중복확인</button>             
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="red">*</span>패스워드</td>
+            <td>
+                <input type="text" class="w06" name="userpw" id="">
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="red">*</span>패스워드확인</td>
+            <td>
+                <input type="text" class="w06" name="userpw1" id="">
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="red">*</span> 이름</td>
+            <td>
+                <input type="text" class="w01" name="name" value="" />
+                
+                <label for="radio-1">남</label>
+                <input type="radio" name="gender" id="radio-1">
+                <label for="radio-2">여</label>
+                <input type="radio" name="gender" id="radio-2">                    
+            </td>
+        </tr>
+        <tr>
+            <td><span class="red">*</span> 생년월일</td>
+            <td style="padding: 0px 0 5px 5px;">
+                <input type="text" class="w02" name="birthday" id="birthday" value="" />
+                <img src="./images/pick.jpg" alt="" class="pick" />
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="red">*</span>휴대폰번호</td>
+            <td>
+                <select name="phone_number" id="ip">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="017">017</option>
+                </select>
+                - <input type="text" name="m_number" maxlength="4" id="in">
+                - <input type="text" name="p_number" maxlength="4" id="in">
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="red">*</span> 주소</td>
+            <td>
+                <input type="text" class="w03" name="zipcode" value="" />
+                <button type="button" onclick="zipcodeFind();" style="width: 120px;">우편번호찾기</button> 
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <!-- 기본주소 -->
+                <input type="text" class="w04" name="address1" value="" />                
+                <!-- 상세주소 -->
+                <input type="text" class="w04" name="address2" value="" />
+            </td>
+        </tr>
+
+        <tr>
+            <td><span class="red">*</span>이메일</td>
+            <td><input type="text" name="email" id="in" class="w05">
+                @ <input type="text" 
+                name="e_address" id="in" class="w05">
+                <select name="email_address" id="ip">
+                <option value="self" >직접입력</option> 
+                <option value="google">google.com</option> 
+                <option value="daum">daum.net</option> 
+                <option value="naver">naver.com</option> 
+                <option value="nate">nate.com</option> 
+                </select>
+            </td>
+        </tr>
+    </table>
+        <br>
+        <p align=center>
+            <input type="submit" name="join" id="join" value="회원가입완료">
+        </p>
+    </form>
+    </div>
+</div>
+</body>
+</html>
