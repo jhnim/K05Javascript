@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J02Operator.html</title>
-
+    
     <script type="text/javascript">
-
+    
         document.write("<h2>산술연산자</h2>");
         document.write("(3 % 5 * 2 + 10 / 5)="+(3 % 5 * 2 + 10 / 5)); //8
         document.write("<br/>3/5="+(3/5)); //0.6(자바라면 0이 나옴)
         /*
         JS는 숫자를 표현할때 정수, 실수를 구분하지 않으므로 계산의 결과는 소수점으로 나올수도 있다.
         */
-
-
+        
         /*
         비교연산자
             :JS에서는 조건식에 0,null,false일때만 false로 처리하고 나머지는 모두 true로 처리한다.
@@ -22,14 +21,14 @@
         document.write("<h2>비교연산자</h2>");
         document.write("a".charCodeAt(0));//a의 아스키코드값 97반환
         document.write("<br/>");
-
+        
         document.write("가나다1">'가나다'); //true
-
+        
         document.write("<br/> 3>9==0의 결과:"+(3>9==0));/*
                                 3>9 ==> false
                                 0 ==> false 그러므로 위는 true가 반환됨
                                 */
-
+                                
         // -1은 0이 아니므로 true
         if(-1){
             document.write("<br/>-1은 true이다.");

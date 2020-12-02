@@ -20,7 +20,7 @@
         else{
             document.write("num1-num2는 거짓이다.<br/>");
         }
-
+        
         /*
         삼항연산자
             : Java와는 다르게 판단식이 참 혹은 거짓일대 결과값을 변수에 대입하지 않아도 된다.
@@ -35,7 +35,7 @@
             num1+"이 "+num2+"보다 크다<br/>"
             :num1+"이 "+num2+"보다 크지 않다<br/>";
         document.write(result);
-
+        
         //함수를 선언할때는 function 키워드를 사용한다.
         function getGrade(){
             /*
@@ -45,16 +45,16 @@
             var kor = parseInt(document.getElementById("kor").value);
             var eng = parseInt(document.getElementById("eng").value);
             var math = parseInt(document.getElementById("math").value);
-
+            
             var avg = (kor+eng+math) / 3;
-
+            
             var strGrade = "";
             if(avg>90) strGrade="A학점";
             else if(avg>80) strGrade="B학점";
             else if(avg>70) strGrade="C학점";
             else if(avg>60) strGrade="D학점";
             else strGrade="<del>F학점</del>";
-
+            
             /*
             시작태그와 종료태그가 있는 모든 엘리먼트에는 아래의 2가지 속성을 가지고 있다.
                 innerHTML : text 혹은 HTML태그를 삽입할 수 있는 속성

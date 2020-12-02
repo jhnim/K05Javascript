@@ -24,11 +24,11 @@
         0 0 1 0 0
         0 0 0 1 0
         0 0 0 0 1
-
+        
         시나리오] for문으로 위와 같은 모양을 출력하는 JS를 작성하시오.
         */
         document.write("<h2>이중 for문을통한 출력<h2>");
-
+        
         for(var i=1 ; i<=5 ; i++){
            
             for(var j=1 ; j<=5 ; j++){
@@ -39,37 +39,33 @@
             }
             document.write("<br/>")
         }
-
+        
         /*
         연습문제] 위 모양을 이중 while문으로 수정하시오.
         */
-
         document.write("<h2>이중 while문으로 수정하여 출력하기</h2>");
         var x=1, y=1;
-
+        
         while(x<=5){
-
+        	
             while(y<=5){
-
+            	
                 if(x==y){
-
+                	
                     document.write("1&nbsp;");
                 }
                 else{
-
+                	
                     document.write("0&nbsp;");
                 }
                 
                y++;
             }
             document.write("<br/>");
-
+            
             x++;
             y=1;
         }
-        
-
-
        
     </script>
 </head>
@@ -91,7 +87,7 @@
             */
             var dan = document.getElementById("dan").value;
             var su = document.getElementById("su").value;
-
+            
             /*
             얻어온 dan만큼 tr(행)이 반복되고, su만큼 td(셀)이 반복되어 
             구구단이 저장된 table을 구성하게 된다
@@ -99,25 +95,25 @@
             var strGugu = "<table border='1'>";
             for(var x=2 ; x<=dan ; x++){
                 strGugu += "<tr>";
-
+                
                 for(var y=1 ; y<=su ; y++){
-
+                	
                     strGugu+="<td>"+x+"*"+y+"="+(x*y)+"</td>";
                 }
-
+                
                 strGugu += "</tr>";
             }
-
+            
             strGugu += "</table>";
-
+            
             /*
             위에서 생성된 구구단 테이블테그를 아래 span태그에 innerHTML속성을 통해 동적 입력한다.
             */
             document.getElementById("here_gugudan").innerHTML = strGugu;
         }
-
+        
     </script>
-
+    
     <table border=1>
 		<tr>
 			<td>단</td>
